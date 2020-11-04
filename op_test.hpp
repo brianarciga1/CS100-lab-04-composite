@@ -18,7 +18,7 @@ TEST(OpTest, OpStringifyNonZero) {
 
 TEST(OpTest, EvalRand) {
     Rand* test = new Rand();
-    EXPECT_NEAR(100, test->evaluate(), 0);
+    EXPECT_LT(test->evaluate(), 100);
 }
 
 #endif //__OP_TEST_HPP__
