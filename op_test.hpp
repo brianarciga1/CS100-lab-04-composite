@@ -5,6 +5,7 @@
 
 #include "op.hpp"
 #include "add.hpp"
+#include "mult.hpp"
 
 TEST(OpTest, OpEvaluateNonZero) {
     Op* test = new Op(8);
@@ -77,6 +78,49 @@ TEST(AddTest, AddStringifyNegative) {
     Base* five = new Op(5);
     Base* test = new Add(eight,five);
     EXPECT_EQ(test->stringify(), "-8.000000+5.000000");
+}
+
+
+TEST(MultTest, MultEvaluateNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->evaluate(), 40);
+}
+
+TEST(MultTest, MultStringifyNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->stringify(), "8.000000*5.000000");
+}
+
+TEST(MultTest, MultEvaluateZero) {
+    Base* zero = new Op(0);
+    Base* five = new Op(5);
+    Base* test = new Mult(zero,five);
+    EXPECT_EQ(test->evaluate(), 0);
+}
+
+TEST(MultTest, MultStringifyZero) {
+    Base* zero = new Op(0);
+    Base* five = new Op(5);
+    Base* test = new Mult(zero,five);
+    EXPECT_EQ(test->stringify(), "0.000000*5.000000");
+}
+
+TEST(MultTest, MultEvaluateNegative) {
+    Base* eight = new Op(-8);
+    Base* five = new Op(5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->evaluate(), -40);
+}
+
+TEST(MultTest, MultStringifyDoubleNegative) {
+    Base* eight = new Op(-8);
+    Base* five = new Op(-5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->stringify(), "-8.000000*-5.000000");
 }
 
 
