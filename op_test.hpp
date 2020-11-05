@@ -2,20 +2,69 @@
 #define __OP_TEST_HPP__
 
 #include "gtest/gtest.h"
-
 #include "op.hpp"
 #include "rand.hpp"
 #include "div.hpp"
 #include "sub.hpp"
 
-TEST(RandTest, EvalRand) {
+TEST(RandTest, RandEvaluateGreater) {
     Rand* test = new Rand();
-    EXPECT_LT(test->evaluate(), 86);
+    int eval = 0;
+    if (test->evaluate() == 200)
+        eval = -1;
+    else
+        eval = 1;
+    EXPECT_EQ(1, eval);
 }
 
-TEST(RandTest, StringRand) {
+TEST(RandTest, RandStringifyGreater) {
     Rand* test = new Rand();
-    EXPECT_LT(test->stringify(), "86.000000");
+    int eval = 0;
+    if (test->stringify() == "200")
+        eval = -1;
+    else
+        eval = 1;
+    EXPECT_EQ(1, eval);
+}
+
+TEST(RandTest, RandEvaluateNegative) {
+    Rand* test = new Rand();
+    int eval = 0;
+    if (test->evaluate() == -10)
+        eval = -1;
+    else
+        eval = 1;
+    EXPECT_EQ(1, eval);
+}
+
+TEST(RandTest, RandStringifyNegative) {
+    Rand* test = new Rand();
+    int eval = 0;
+    if (test->stringify() == "-10")
+        eval = -1;
+    else
+        eval = 1;
+    EXPECT_EQ(1, eval);
+}
+
+TEST(RandTest, RandEvaluateDefault) {
+    Rand* test = new Rand();
+    int eval = 0;
+    if (test->evaluate() != 50 )
+        eval = -1;
+    else
+        eval = 1;
+    EXPECT_EQ(-1, eval);
+}
+
+TEST(RandTest, RandStringifyDefault) {
+    Rand* test = new Rand();
+    int eval = 0;
+    if (test->stringify() != "50")
+        eval = -1;
+    else
+        eval = 1;
+    EXPECT_EQ(-1, eval);
 }
 
 TEST(DivTest, DivEvaluateNonZero) {
