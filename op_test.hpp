@@ -3,151 +3,163 @@
 
 #include "gtest/gtest.h"
 #include "op.hpp"
-#include "rand.hpp"
-#include "div.hpp"
-#include "sub.hpp"
+#include "add.hpp"
+#include "mult.hpp"
+#include "power.hpp"
 
-TEST(RandTest, RandEvaluateGreater) {
-    Rand* test = new Rand();
-    int eval = 0;
-    if (test->evaluate() == 200)
-        eval = -1;
-    else
-        eval = 1;
-    EXPECT_EQ(1, eval);
+TEST(OpTest, OpStringifyNonZero) {
+    Op* test = new Op(8);
+    EXPECT_EQ(test->stringify(), "8.000000");
 }
 
-TEST(RandTest, RandStringifyGreater) {
-    Rand* test = new Rand();
-    int eval = 0;
-    if (test->stringify() == "200")
-        eval = -1;
-    else
-        eval = 1;
-    EXPECT_EQ(1, eval);
+TEST(OpTest, OpEvaluateNegative) {
+    Op* test = new Op(-8);
+    EXPECT_EQ(test->evaluate(), -8);
 }
 
-TEST(RandTest, RandEvaluateNegative) {
-    Rand* test = new Rand();
-    int eval = 0;
-    if (test->evaluate() == -10)
-        eval = -1;
-    else
-        eval = 1;
-    EXPECT_EQ(1, eval);
+TEST(OpTest, OpStringifyNegative) {
+    Op* test = new Op(-8);
+    EXPECT_EQ(test->stringify(), "-8.000000");
 }
 
-TEST(RandTest, RandStringifyNegative) {
-    Rand* test = new Rand();
-    int eval = 0;
-    if (test->stringify() == "-10")
-        eval = -1;
-    else
-        eval = 1;
-    EXPECT_EQ(1, eval);
-}
-
-TEST(RandTest, RandEvaluateDefault) {
-    Rand* test = new Rand();
-    int eval = 0;
-    if (test->evaluate() != 50 )
-        eval = -1;
-    else
-        eval = 1;
-    EXPECT_EQ(-1, eval);
-}
-
-TEST(RandTest, RandStringifyDefault) {
-    Rand* test = new Rand();
-    int eval = 0;
-    if (test->stringify() != "50")
-        eval = -1;
-    else
-        eval = 1;
-    EXPECT_EQ(-1, eval);
-}
-
-TEST(DivTest, DivEvaluateNonZero) {
-    Base* eight = new Op(8);
-    Base* five = new Op(5);
-    Base* test = new Div(eight,five);
-    EXPECT_EQ(test->evaluate(), 1.6);
-}
-
-TEST(DivTest, DivStringifyNonZero) {
-    Base* eight = new Op(8);
-    Base* five = new Op(5);
-    Base* test = new Div(eight,five);
-    EXPECT_EQ(test->stringify(), "8.000000/5.000000");
-}
-
-TEST(DivTest, DivEvaluateZero) {
-    Base* zero = new Op(0);
-    Base* five = new Op(5);
-    Base* test = new Div(zero,five);
+TEST(OpTest, OpEvaluateZero) {
+    Op* test = new Op(0);
     EXPECT_EQ(test->evaluate(), 0);
 }
 
-TEST(DivTest, DivStringifyZero) {
-    Base* zero = new Op(0);
-    Base* five = new Op(5);
-    Base* test = new Div(zero,five);
-    EXPECT_EQ(test->stringify(), "0.000000/5.000000");
+TEST(OpTest, OpStringifyZero) {
+    Op* test = new Op(0);
+    EXPECT_EQ(test->stringify(), "0.000000");
 }
 
-TEST(DivTest, DivEvaluateNegative) {
-    Base* eight = new Op(-8);
-    Base* five = new Op(5);
-    Base* test = new Div(eight,five);
-    EXPECT_EQ(test->evaluate(), -1.6);
-}
 
-TEST(DivTest, DivStringifyDoubleNegative) {
-    Base* eight = new Op(-8);
-    Base* five = new Op(5);
-    Base* test = new Div(eight,five);
-    EXPECT_EQ(test->stringify(), "-8.000000/5.000000");
-}
-
-TEST(SubTest, SubEvaluateNonZero) {
+TEST(AddTest, AddEvaluateNonZero) {
     Base* eight = new Op(8);
     Base* five = new Op(5);
-    Base* test = new Sub(eight,five); 
-    EXPECT_EQ(test->evaluate(), 3);
+    Base* test = new Add(eight,five); 
+    EXPECT_EQ(test->evaluate(), 13);
 }
 
-TEST(SubTest, SubStringifyNonZero) {
+TEST(AddTest, AddStringifyNonZero) {
     Base* eight = new Op(8);
     Base* five = new Op(5);
-    Base* test = new Sub(eight,five);
-    EXPECT_EQ(test->stringify(), "8.000000-5.000000");
+    Base* test = new Add(eight,five);
+    EXPECT_EQ(test->stringify(), "8.000000+5.000000");
 }
 
-TEST(SubTest, SubEvaluateZero) {
+TEST(AddTest, AddEvaluateZero) {
     Base* zero = new Op(0);
     Base* zero2 = new Op(0);
-    Base* test = new Sub(zero,zero2);
+    Base* test = new Add(zero,zero2);
     EXPECT_EQ(test->evaluate(), 0);
 }
 
-TEST(SubTest, SubStringifyZero) {
+TEST(AddTest, AddStringifyZero) {
     Base* zero = new Op(0);
     Base* zero2 = new Op(0);
-    Base* test = new Sub(zero,zero2);
-    EXPECT_EQ(test->stringify(), "0.000000-0.000000");
+    Base* test = new Add(zero,zero2);
+    EXPECT_EQ(test->stringify(), "0.000000+0.000000");
 }
 
-TEST(SubTest, SubEvaluateNegative) {
+TEST(AddTest, AddEvaluateNegative) {
     Base* eight = new Op(-8);
     Base* five = new Op(5);
-    Base* test = new Sub(eight,five);
-    EXPECT_EQ(test->evaluate(), -13);
+    Base* test = new Add(eight,five);
+    EXPECT_EQ(test->evaluate(), -3);
 }
 
-TEST(SubTest, SubStringifyNegative) {
+TEST(AddTest, AddStringifyNegative) {
     Base* eight = new Op(-8);
     Base* five = new Op(5);
-    Base* test = new Sub(eight,five);
-    EXPECT_EQ(test->stringify(), "-8.000000-5.000000");
+    Base* test = new Add(eight,five);
+    EXPECT_EQ(test->stringify(), "-8.000000+5.000000");
 }
+
+
+TEST(MultTest, MultEvaluateNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->evaluate(), 40);
+}
+
+TEST(MultTest, MultStringifyNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->stringify(), "8.000000*5.000000");
+}
+
+TEST(MultTest, MultEvaluateZero) {
+    Base* zero = new Op(0);
+    Base* five = new Op(5);
+    Base* test = new Mult(zero,five);
+    EXPECT_EQ(test->evaluate(), 0);
+}
+
+TEST(MultTest, MultStringifyZero) {
+    Base* zero = new Op(0);
+    Base* five = new Op(5);
+    Base* test = new Mult(zero,five);
+    EXPECT_EQ(test->stringify(), "0.000000*5.000000");
+}
+
+TEST(MultTest, MultEvaluateNegative) {
+    Base* eight = new Op(-8);
+    Base* five = new Op(5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->evaluate(), -40);
+}
+
+TEST(MultTest, MultStringifyDoubleNegative) {
+    Base* eight = new Op(-8);
+    Base* five = new Op(-5);
+    Base* test = new Mult(eight,five);
+    EXPECT_EQ(test->stringify(), "-8.000000*-5.000000");
+}
+
+
+TEST(PowTest, PowEvaluateNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Power(eight,five);
+    EXPECT_EQ(test->evaluate(), 32768);
+}
+
+TEST(PowTest, PowStringifyNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Power(eight,five);
+    EXPECT_EQ(test->stringify(), "8.000000**5.000000");
+}
+
+TEST(PowTest, PowEvaluateZeroExponent) {
+    Base* eight = new Op(8);
+    Base* zero = new Op(0);
+    Base* test = new Power(eight,zero);
+    EXPECT_EQ(test->evaluate(), 1);
+}
+
+TEST(PowTest, PowStringifyZeroExponent) {
+    Base* eight = new Op(8);
+    Base* zero = new Op(0);
+    Base* test = new Power(eight,zero);
+    EXPECT_EQ(test->stringify(), "8.000000**0.000000");
+}
+
+TEST(PowTest, PowEvaluateNegativeExponent) {
+    Base* eight = new Op(8);
+    Base* two = new Op(-2);
+    Base* test = new Power(eight,two);
+    EXPECT_NEAR(test->evaluate(), 0.01, 0.02);
+}
+
+TEST(PowTest, PowStringifyNegativeExponent) {
+    Base* eight = new Op(8);
+    Base* two = new Op(-2);
+    Base* test = new Power(eight,two);
+    EXPECT_EQ(test->stringify(), "8.000000**-2.000000");
+}
+
+
 #endif //__OP_TEST_HPP__
