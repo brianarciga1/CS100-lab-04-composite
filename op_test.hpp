@@ -6,6 +6,7 @@
 #include "op.hpp"
 #include "add.hpp"
 #include "mult.hpp"
+#include "power.hpp"
 
 TEST(OpTest, OpEvaluateNonZero) {
     Op* test = new Op(8);
@@ -121,6 +122,49 @@ TEST(MultTest, MultStringifyDoubleNegative) {
     Base* five = new Op(-5);
     Base* test = new Mult(eight,five);
     EXPECT_EQ(test->stringify(), "-8.000000*-5.000000");
+}
+
+
+TEST(PowTest, PowEvaluateNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Power(eight,five);
+    EXPECT_EQ(test->evaluate(), 32768);
+}
+
+TEST(PowTest, PowStringifyNonZero) {
+    Base* eight = new Op(8);
+    Base* five = new Op(5);
+    Base* test = new Power(eight,five);
+    EXPECT_EQ(test->stringify(), "8.000000**5.000000");
+}
+
+TEST(PowTest, PowEvaluateZeroExponent) {
+    Base* eight = new Op(8);
+    Base* zero = new Op(0);
+    Base* test = new Power(eight,zero);
+    EXPECT_EQ(test->evaluate(), 1);
+}
+
+TEST(PowTest, PowStringifyZeroExponent) {
+    Base* eight = new Op(8);
+    Base* zero = new Op(0);
+    Base* test = new Power(eight,zero);
+    EXPECT_EQ(test->stringify(), "8.000000**0.000000");
+}
+
+TEST(PowTest, PowEvaluateNegativeExponent) {
+    Base* eight = new Op(8);
+    Base* two = new Op(-2);
+    Base* test = new Power(eight,two);
+    EXPECT_NEAR(test->evaluate(), 0.01, 0.02);
+}
+
+TEST(PowTest, PowStringifyNegativeExponent) {
+    Base* eight = new Op(8);
+    Base* two = new Op(-2);
+    Base* test = new Power(eight,two);
+    EXPECT_EQ(test->stringify(), "8.000000**-2.000000");
 }
 
 
