@@ -1,5 +1,5 @@
-#ifndef __OP_TEST_HPP__
-#define __OP_TEST_HPP__
+#ifndef __OP2_TEST_HPP__
+#define __OP2_TEST_HPP__
 
 #include "gtest/gtest.h"
 #include "op.hpp"
@@ -150,4 +150,4 @@ TEST(SubTest, SubStringifyNegative) {
     Base* test = new Sub(eight,five);
     EXPECT_EQ(test->stringify(), "-8.000000-5.000000");
 }
-#endif //__OP_TEST_HPP__
+#endif //__OP2_TEST_HPP__
