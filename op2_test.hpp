@@ -1,5 +1,5 @@
-#ifndef __OP_TEST_HPP__
-#define __OP_TEST_HPP__
+#ifndef __OP2_TEST_HPP__
+#define __OP2_TEST_HPP__
 
 #include "gtest/gtest.h"
 #include "op.hpp"
