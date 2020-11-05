@@ -2,16 +2,10 @@
 #define __OP_TEST_HPP__
 
 #include "gtest/gtest.h"
-
 #include "op.hpp"
 #include "add.hpp"
 #include "mult.hpp"
 #include "power.hpp"
-
-TEST(OpTest, OpEvaluateNonZero) {
-    Op* test = new Op(8);
-    EXPECT_EQ(test->evaluate(), 8);
-}
 
 TEST(OpTest, OpStringifyNonZero) {
     Op* test = new Op(8);
